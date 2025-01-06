@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=img, initial-scale=1.0">
+    <title>youtube.com clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        p {
+            font-family: Roboto, Arial;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .thubm {
+            width: 100%;
+        }
+
+        .search-bar {
+            font-size: 15px;
+            margin-left: 10px;
+            flex: 1;
+            display: inline-block;
+            height: 36px;
+            padding-left: 10px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: gray;
+            border-radius: 2px;
+            box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.05);
+            width: 0;
+
+        }
+
+        .search-bar::placeholder {
+            font-family: Roboto, arial;
+        }
+
+        .talking {
+            margin-top: 10px;
+            margin-left: 0px;
+            margin-right: 2px;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 20px;
+            margin-bottom: 12px;
+        }
+
+        .author {
+            text-align: top;
+            display: block;
+            font-size: 12px;
+            color: rgb(96, 96, 96);
+            margin-bottom: 4px;
+        }
+
+        .sebas {
+            display: block;
+            font-size: 12px;
+            color: rgb(96, 96, 96);
+
+        }
+
+
+
+        .picture {
+
+            display: inline-block;
+            width: 50px;
+            vertical-align: top;
+        }
+
+
+        .profile-picture {
+            width: 40px;
+            vertical-align: top;
+            display: inline-block;
+            border: none;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
+
+        .video-info-grid {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 20px;
+            row-gap: 20px;
+
+        }
+
+        @media (max-width:850px) {
+            .video-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width:851px) and (max-width:999px) {
+            .video-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        @media (min-width:1200px) {
+            .video-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        .body {
+            /* this style below will be inherited */
+            margin: 0;
+            padding-top: 80px;
+            padding-left: 96px;
+            padding-right: 24px;
+            background-color: rgb(248, 242, 242);
+
+
+        }
+
+        .header {
+            height: 55px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgb(189, 186, 186);
+            z-index: 1;
+        }
+
+        .left-section {
+
+            width: 150px;
+            display: flex;
+            align-items: center;
+        }
+
+        .middle-section {
+
+            flex: 1;
+            margin-left: 70px;
+            margin-right: 37px;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+        }
+
+        .right-section {
+
+            width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .menu {
+            height: 35px;
+            margin-left: 15px;
+            margin-right: 15px;
+
+        }
+
+        .youtube-logo {
+            height: 18px;
+
+
+        }
+
+        .search-icon {
+            height: 31px;
+            width: 40px;
+
+
+        }
+
+        .voice-icon {
+            height: 20px;
+
+        }
+
+        .v-s-b {
+            margin-left: 12px;
+            height: 38px;
+            border-radius: 100%;
+            border-color: rgb(0, 0, 0);
+            border: none;
+        }
+
+        .upload-icon {
+            height: 25px;
+            border: none;
+            border-radius: 50px;
+            background-color: white;
+
+        }
+
+        .n-icon {
+            height: 30px;
+
+        }
+
+        .n-i-c {
+            position: relative;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: rgba(228, 43, 43, 0.938);
+            color: white;
+            font-family: Roboto, Arial;
+            font-size: 10px;
+            width: 12px;
+            border: none;
+            border-radius: 100%;
+            padding-left: 6px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .pp {
+            height: 32px;
+            margin-right: 20px;
+            border-radius: 100%;
+            padding-left: 2px;
+        }
+
+        .u-b {
+            border: none;
+            background-color: white;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            top: 55px;
+            background-color: white;
+            width: 72px;
+            z-index: 200;
+            padding-top: 12px;
+        }
+
+        .video-time {
+            background-color: black;
+            color: white;
+            position: absolute;
+            right: 6px;
+            bottom: 9px;
+            padding: 2px;
+        }
+
+        .thumbnail-row {
+            position: relative;
+        }
+
+        .sidebar-link {
+            height: 70px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer;
+
+        }
+
+        .sidebar-link:hover {
+            background-color: lightgray;
+
+        }
+
+        .sidebar-link img {
+            height: 28px;
+        }
+
+        .sidebar-link div {
+            font-family: Roboto, Arial;
+            font-size: 10px;
+            margin-bottom: 0px;
+        }
+    </style>
+
+</head>
+
+<body class="body">
+    <div class="header">
+        <div class="left-section">
+
+            <img class="menu" src="index.png" alt="index">
+            <img class="youtube-logo" src="yt_logo_rgb_light.png" alt="youtube logo">
+
+        </div>
+
+
+        <div class="middle-section">
+            <input class="search-bar" type="text" placeholder="search">
+            <button search-button>
+                <img class="search-icon" src="1024px-Search_Icon.svg.png" alt="search">
+
+            </button>
+            <!-- put position absulute inside position relative  -->
+            <button class="v-s-b"> <img class="voice-icon" src="download.jpg" alt=""></button>
+
+        </div>
+
+
+        <div class="right-section">
+            <button class="u-b"> <img class="upload-icon" src="upload.jpeg" alt="upload"> </button>
+            <div class="n-i-c">
+                <img class="n-icon" src="download-black-notification-bell-icon-png-11638985042go8osljf1q.png"
+                    alt="notification">
+                <div class="notification-count">3</div>
+            </div>
+            <img class="pp" src="IMG_20230519_174648_1~2.jpg" alt="profile-picture">
+        </div>
+
+
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-link"> <img src="home.svg" alt="home">
+            <div>Home</div>
+        </div>
+
+        <div class="sidebar-link"> <img src="explore.svg" alt="explore">
+            <div>Explore</div>
+        </div>
+
+        <div class="sidebar-link"> <img src="subscriptions.svg" alt="">
+            <div>Subscriptions
+            </div>
+        </div>
+
+        <div class="sidebar-link"> <img src="originals.svg" alt="">
+            <div>Originals</div>
+        </div>
+
+        <div class="sidebar-link"> <img src="youtube-music.svg" alt="youtube-music">
+            <div>Youtube music</div>
+        </div>
+
+        <div class="sidebar-link"> <img src="library.svg" alt="library">
+            <div>Library</div>
+        </div>
+
+
+
+    </div>
+
+    <div class="video-grid">
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="thumbnail-1.webp" alt="jhfjhgui">
+                <div class="video-time">14:20</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-1.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">talking tech and AI with Google CEO Sundor Pichai.</p>
+
+                    <p class="author">Marques Brownlee </p>
+                    <p class="sebas">3.4M views &#183; 6 month ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="thumbnail-2.webp" alt="jhfjhgui">
+                <div class="video-time">08:22</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-2.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        Try Not To Laugh Challenge #9</p>
+
+                    <p class="author">Markiplier</p>
+                    <p class="sebas">19M views &#183; 4 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-01 212344.png" alt="jhfjhgui">
+
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/download.jpg" alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">কোয়েল পাখি.</p>
+
+                    <p class="author">Nila's vlogs and cooking </p>
+                    <p class="sebas">69 views &#183; </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="thumbnail-4.webp" alt="jhfjhgui">
+                <div class="video-time">09:13</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-4.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">The Simplest Math problem no One Can solve-collatz conjecture</p>
+
+                    <p class="author">Veritsium</p>
+                    <p class="sebas">18M views &#183; 4 months ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="thumbnail-5.webp" alt="jhfjhgui">
+                <div class="video-time">22:09</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-5.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">kadane's Algorithm to Maximum Sum Subarray problem.</p>
+
+                    <p class="author">CS Dojo</p>
+                    <p class="sebas">519k views &#183; 5 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="thumbnail-6.webp" alt="jhfjhgui">
+                <div class="video-time">11:17</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        Anything You Can Fit In The Ciecle I'll Pay For </p>
+
+                    <p class="author">MrBeast</p>
+                    <p class="sebas">19M views &#183; 4 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-05 191207.png" alt="jhfjhgui">
+                <div class="video-time">11:31</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        Diwali Returns | Ashish Chanchlani </p>
+
+                    <p class="author">ashish chanchlani vines</p>
+                    <p class="sebas">50M views &#183; 3 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-05 194615.png" alt="jhfjhgui">
+                <div class="video-time">03:59</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        Kal Theke Nai </p>
+
+                    <p class="author">Antik Mahmud</p>
+                    <p class="sebas">746k views &#183; 8 months ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-05 204443.png" alt="jhfjhgui">
+                <div class="video-time">06:45</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        BB Ki Vines- | Detective Mangloo | </p>
+
+                    <p class="author">BB Vines</p>
+                    <p class="sebas">30M views &#183; 3 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-05 204605.png" alt="jhfjhgui">
+                <div class="video-time">18:52</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        Tom & Jerry | The Tastiest Food in Tom & Jerry 🍗 | Classic Cartoon Compilation | </p>
+
+                    <p class="author">CARTOONS BOX SK</p>
+                    <p class="sebas">1.6K views &#183; 12 hours ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-05 204542.png" alt="jhfjhgui">
+                <div class="video-time">06:21</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        JAVELIN THROW! Ft. SHAADI WAALE UNCLE </p>
+
+                    <p class="author">R.G Bucket Lis</p>
+                    <p class="sebas">19M views &#183; 1 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-05 204513.png" alt="jhfjhgui">
+                <div class="video-time">06:22</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        Bablooji's ex? | Chakhne Pe Charcha |BB Ki Vines </p>
+
+                    <p class="author">BB Ki Vines</p>
+                    <p class="sebas">41M views &#183; 3 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="video">
+
+            <div class="thumbnail-row">
+
+                <img class="thubm" src="Screenshot 2023-07-05 191030.png" alt="jhfjhgui">
+                <div class="video-time">33:15</div>
+            </div>
+            <div class="video-info-grid">
+
+                <div class="picture"><img class="profile-picture" src="channel-picture/channel-6.jpeg"
+                        alt="channel logo">
+                </div>
+
+
+                <div class="video-info">
+                    <p class="talking">
+                        हिंदी Oggy and the Cockroaches 💜💙 MY BEST FRIEND COMPILATION 💙💜 Hindi Cartoons for Kids </p>
+
+                    <p class="author">Oggy Hindi - हिन्दी
+                    </p>
+                    <p class="sebas">22M views &#183; 2 years ago </p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
